@@ -23,6 +23,7 @@
   
   		$this->alan = "ALAN IS GOD";
 		$this->IDlength = 36;
+		$this->jsFile = $assetsUrl."js/likeThisPage.functions.js";
     }
 	
 	
@@ -36,7 +37,7 @@
 		if(!isset($_COOKIE['modLTP_uuid'])){
 			// No cookie yet, generate one
 			$uuid = $this->randID();
-			$obj->script = '<script type="text/javascript">function setCookie(c_name,value,exdays){var exdate=new Date();exdate.setDate(exdate.getDate() + exdays);var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());document.cookie=c_name + "=" + c_value;};setCookie("modLTP_uuid","'.$uuid.'",9999);</script>';
+			$obj->script = '<script type="text/javascript">setCookie("modLTP_uuid","'.$uuid.'",9999);</script>';
 		} else {
 			$uuid = $_COOKIE['modLTP_uuid'];
 		};
@@ -56,6 +57,11 @@
 	
 	
 	
+	
+	
+	function getJavascriptFile(){
+		return '<script type="text/javascript" src="'.$this->jsFile.'"></script>';
+	}//
 	
 	
 	

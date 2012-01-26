@@ -73,9 +73,12 @@ $properties = array(
 $out = $LTP->getChunk($tpl,$properties);
 
 
+// Load the javascripts
+$jsFile = $LTP->getJavascriptFile();
+
 
 
  
-return $out;
+return $jsFile.$out;
 
 ?>
