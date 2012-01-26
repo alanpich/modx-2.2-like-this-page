@@ -4,11 +4,11 @@ global $modx;
 
 $ltpCorePath = $modx->getOption('core_path').'components/likeThisPage/';
 define('ltp_core_path',$modx->getOption('LTP.core_path',null,$ltpCorePath));
-$LTP_classPath = ltp_core_path.'model/modLikeThisPage/';
+$LTP_classPath = ltp_core_path.'model/LTP/';
 
-require_once $LTP_classPath.'modLikeThisPage.class.php';
-$LTP = new modLikeThisPage(&$modx);
-if (!($LTP instanceof modLikeThisPage)) return 'ERROR: Could not initialise LTP class'."\n";
+require_once $LTP_classPath.'LTP.class.php';
+$LTP = new LTP(&$modx);
+if (!($LTP instanceof LTP)) return 'ERROR: Could not initialise LTP class'."\n";
 
 
 
@@ -25,6 +25,8 @@ $dir = $modx->getOption('dir',$scriptProperties,'ASC');
 $resID = $LTP->getCurrentResourceID();
 
 
+
+
 // Get this users uniqueID (if they done have one, create it)
 $uuID  = $LTP->getUniqueUserID();
 if(isset($uuID->script)){
@@ -33,7 +35,7 @@ if(isset($uuID->script)){
 $uuID = $uuID->ID;
 
 // Does the user like this already?
-$userLikesThis = true;
+$userLikesThis = $LTP->doILikeThisPage();
 
 
 // Count how many people have liked this page
@@ -74,7 +76,7 @@ $out = $LTP->getChunk($tpl,$properties);
 
 
 // Load the javascripts
-$jsFile = $LTP->getJavascriptFile();
+$jsFile .= '<script type="text/javascript" src="'.$LTP->jsFile.'"></script>'."\n".'<script>'."\n".'onLTP = function(){'."\n".$LTP->javascript."\n".'};'."\n".'</script>'."\n".'';
 
 
 

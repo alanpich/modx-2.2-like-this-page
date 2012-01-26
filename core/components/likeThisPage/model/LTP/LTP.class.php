@@ -22,6 +22,13 @@
 		
 		
 		$this->alan = 'GOD';
+		
+		
+		$this->cookieName = 'modx-likeThisPage-uuid';
+		$this->keyLength = 32;
+		$this->javascript = '';
+		$this->jsFile = $this->config['assetsUrl'].'js/likeThisPage.functions.js';
+		
     }
 	
 	
@@ -31,7 +38,56 @@
 	
 	
 	
+	// Get current resource ID--------------------------------------------------------------
+	function getCurrentResourceID(){
+		return $this->modx->resource->get('id');
+	}//	
 	
+	// Get unique user id ------------------------------------------------------------------
+	function getUniqueUserID(){
+	
+		// Check if the user already has a cookie
+		$exists = isset($_COOKIE[$this->cookieName]);
+		
+		if(!isset($_COOKIE[$this->cookieName])){
+			
+			// Generate a new unique key
+			$uuid = $this->generateNewUniqueKey();
+			$this->javascript.= 'addCookie("'.$this->cookieName.'","'.$uuid.'",9999);';
+			
+		} else {
+			$uuid = $COOKIE[$this->cookieName];	
+		};
+		
+		return $uuid;	
+	}//	
+	
+	
+	
+	
+	// Generate a new uuid key ------------------------------------------------------------------
+	function generateNewUniqueKey(){
+		$characters = '0123456789abcdefghijklmnopqrstuvwxyz{[}]~#@:;?/>.<,';
+		$string = '';    
+		for ($p = 0; $p < $this->keyLength; $p++) {
+		    $string .= $characters[mt_rand(0, strlen($characters))];
+		}
+		return $string;
+	}//
+	
+	
+	
+	// Count likes for this page  ------------------------------------------------------------------
+	function getTotalLikesForThisPage(){
+		return 2235;
+	}//
+	
+	// Does user like this page already?  ------------------------------------------------------------------
+	function doILikeThisPage(){
+		
+		return false;
+		
+	}//
 	
 	
 	
