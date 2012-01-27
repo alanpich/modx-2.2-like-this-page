@@ -25,14 +25,14 @@ $dir = $modx->getOption('dir',$scriptProperties,'ASC');
 $resID = $LTP->getCurrentResourceID();
 
 
+// TEMP
+//$LTP->likeThisPage( $resID );
+
 
 
 // Get this users uniqueID (if they done have one, create it)
-$uuID  = $LTP->getUniqueUserID();
-if(isset($uuID->script)){
-	$cookieScript = $uuID->script;
-};
-$uuID = $uuID->ID;
+$uuID  = $LTP->uuID;
+
 
 // Does the user like this already?
 $userLikesThis = $LTP->doILikeThisPage();
@@ -40,7 +40,6 @@ $userLikesThis = $LTP->doILikeThisPage();
 
 // Count how many people have liked this page
 $likes = $LTP->getTotalLikesForThisPage();
-
 
 
 
@@ -53,7 +52,7 @@ if( $userLikesThis ){
 	};
 } else {
 	// Prepare button content
-	$btn = '<a href="#" onclick="alert(\'like this\');">';
+	$btn = '<a href="#" id="LTP_likeThisPageButton">';
 	if( substr($button,0,4) == "img:" ){
 		$btn .= '<img src="'.substr($button,4).'" alt="Like this Article" />';
 	} else {
@@ -74,9 +73,8 @@ $properties = array(
 // Parse the chunk
 $out = $LTP->getChunk($tpl,$properties);
 
-
 // Load the javascripts
-$jsFile .= '<script type="text/javascript" src="'.$LTP->jsFile.'"></script>'."\n".'<script>'."\n".'onLTP = function(){'."\n".$LTP->javascript."\n".'};'."\n".'</script>'."\n".'';
+$jsFile .= '<script type="text/javascript" src="'.$LTP->jsFile.'"></script>'."\n".'<script>'."\n".'LTP.startup = function(){'."\n".$LTP->javascript.'}'."\n".'</script>'."\n";
 
 
 

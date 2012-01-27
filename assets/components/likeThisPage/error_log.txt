@@ -1,0 +1,2 @@
+[27-Jan-2012 14:23:10] PHP Fatal error:  Call to a member function get() on a non-object in /var/www/modx/modx-2.2-like-this-page/core/components/likeThisPage/model/LTP/LTP.class.php on line 49
+[27-Jan-2012 14:23:49] PHP Parse error:  syntax error, unexpected '{' in /var/www/modx/modx-2.2-like-this-page/core/components/likeThisPage/model/LTP/LTP.class.php on line 49

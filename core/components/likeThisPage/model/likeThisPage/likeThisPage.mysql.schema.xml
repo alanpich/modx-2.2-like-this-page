@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model package="likeThisPage" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" version="1.1">
 	<object class="LikeThisPage" table="like_this_page" extends="xPDOSimpleObject">
+		<field key="id" dbtype="int" precision="11" phptype="integer" null="false" />
 		<field key="timestamp" dbtype="int" precision="11" phptype="integer" null="false" />
 		<field key="uuid" dbtype="varchar" precision="64" phptype="string" null="false" />
 		<field key="resid" dbtype="int" precision="11" phptype="integer" null="false" />
